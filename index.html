@@ -143,7 +143,7 @@ dialog::backdrop { background: rgba(0,0,0,.72); }
 .tl li b { font: 800 15px/1.2 var(--head); }
 .session { white-space: pre-wrap; color: #dcdce2; font-size: 14.5px; }
 
-footer { border-top: 1px solid var(--line); color: var(--faint); font-size: 13px; padding: 24px 0 40px; }
+footer { color: var(--faint); font-size: 12px; padding: 8px 0 28px; }
 footer p { margin: 0 0 6px; max-width: 80ch; }
 
 @media (max-width: 980px) {
@@ -190,11 +190,7 @@ footer p { margin: 0 0 6px; max-width: 80ch; }
 
 <dialog id="case"><div class="dhead"><b id="caseTitle"></b><button onclick="document.getElementById('case').close()">Close</button></div><div class="dbody" id="caseBody"></div></dialog>
 
-<footer><div class="wrap">
-  <p>Fan made commentary on a public live show. Not affiliated with KarmicX, KXL or any Dabbleverse site.</p>
-  <p>Scores come from software listening to the public broadcast: speech to text for the words, voice prints to tell him apart from clips and guests, and a voice tone model for anger and pitch. Treat anger and mocking voice as rough reads.</p>
-  <p id="updated"></p>
-</div></footer>
+<footer><div class="wrap"><p>Fan made. Not affiliated with KarmicX.</p></div></footer>
 
 <script>
 const $ = s => document.querySelector(s);
@@ -227,7 +223,6 @@ async function load() {
   const live = D.streams.find(s => s.status === "live");
   $("#air").classList.toggle("on", !!live);
   $("#airText").textContent = live ? "Live now" : D.streams.length ? `Off air since ${D.streams[0].date.replace(/, \d{4}$/, "")}` : "Off air";
-  $("#updated").textContent = "Updated " + new Date(D.updated * 1000).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) + ". Refreshes on its own while he is live.";
   scorecard(live); streams(); leaderboard(); file();
   show(location.hash.slice(1) || "scorecard", true);
 }
