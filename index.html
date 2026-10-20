@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The KarmicX Files</title>
+<meta name="description" content="A fan made case file on the KXL live show: the Hack Score, every F bomb, and how the voice heats up, updated after every stream.">
+<meta property="og:title" content="The KarmicX Files">
+<meta property="og:description" content="The Hack Score, every F bomb, and how the voice heats up. Updated after every stream.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231a2a8f'/%3E%3Ctext x='16' y='23' font-family='Arial Narrow,Arial' font-weight='700' font-size='18' text-anchor='middle' fill='%23ffd23f'%3EKX%3C/text%3E%3C/svg%3E">
+<style>
+/* Late night cable guide: blue listing blocks, white condensed type, yellow time slots. */
+:root {
+  --guide: #16237a;      /* page */
+  --cell: #2234b0;       /* listing block */
+  --cell-hi: #2c43d0;    /* open or hovered block */
+  --gap: #0b1452;        /* the dark gaps between blocks */
+  --ink: #f4f6ff;
+  --ink-dim: #b3bef5;
+  --slot: #ffd23f;       /* time slots and scores */
+  --onair: #ff5a4a;
+  --cond: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Source Sans 3", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--guide); }
+body { margin: 0; color: var(--ink); font: 17px/1.55 var(--body); background: var(--guide); }
+a { color: var(--slot); }
+:focus-visible { outline: 3px solid var(--slot); outline-offset: 2px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+/* channel bar */
+.bar { background: var(--gap); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+.brand { font: 800 26px/1 var(--cond); letter-spacing: .3px; margin: 0; }
+.brand span { color: var(--slot); }
+.air { font: 600 17px/1 var(--cond); display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); }
+.air.on { color: var(--ink); }
+.air .lamp { width: 11px; height: 11px; border-radius: 50%; background: #56609a; }
+.air.on .lamp { background: var(--onair); box-shadow: 0 0 0 4px rgba(255,90,74,.25); }
+
+/* the rating bug */
+.verdict { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; padding: 40px 0 34px; }
+.bug { border: 4px solid var(--ink); padding: 10px 18px 6px; text-align: center; min-width: 150px; animation: bugin .9s ease-out both; }
+.bug small { display: block; font: 700 22px/1 var(--cond); letter-spacing: 2px; }
+.bug b { display: block; font: 800 104px/.92 var(--cond); font-variant-numeric: tabular-nums; }
+.bug .desc { display: flex; justify-content: center; gap: 6px; border-top: 3px solid var(--ink); margin-top: 6px; padding-top: 5px; font: 700 20px/1 var(--cond); min-height: 25px; }
+@keyframes bugin { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .bug { animation: none; } }
+.verdict h2 { font: 700 44px/1.02 var(--cond); margin: 0 0 10px; max-width: 18ch; }
+.verdict p { margin: 0; color: var(--ink-dim); max-width: 60ch; }
+.key { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 18px; margin-top: 16px; font-size: 15px; color: var(--ink-dim); }
+.key b { font: 700 18px/1 var(--cond); color: var(--ink); display: inline-block; width: 22px; }
+.key i { font-style: normal; color: var(--slot); font-family: var(--cond); font-weight: 700; font-size: 18px; }
+
+/* section heads read like guide headings, sentence case */
+h3.sec { font: 700 30px/1 var(--cond); margin: 44px 0 12px; }
+.sub { color: var(--ink-dim); margin: -4px 0 14px; max-width: 70ch; }
+
+/* listings grid */
+.grid { display: grid; gap: 3px; background: var(--gap); border: 3px solid var(--gap); }
+.listing { display: grid; grid-template-columns: 150px 1fr 90px 90px 110px; gap: 3px; background: var(--gap); }
+.listing > * { background: var(--cell); padding: 10px 12px; }
+.listing.head > * { background: var(--gap); color: var(--ink-dim); font: 600 16px/1.2 var(--cond); padding: 6px 12px; }
+.listing button.show { all: unset; cursor: pointer; display: block; background: var(--cell); padding: 10px 12px; }
+.listing button.show:hover, .listing.open > * { background: var(--cell-hi); }
+.slot { font: 700 20px/1.1 var(--cond); color: var(--slot); }
+.slot small { display: block; font-size: 15px; color: var(--ink-dim); font-weight: 600; }
+.title { font: 700 22px/1.1 var(--cond); }
+.title small { display: block; font: 400 15px/1.3 var(--body); color: var(--ink-dim); margin-top: 3px; }
+.num { font: 700 26px/1 var(--cond); font-variant-numeric: tabular-nums; text-align: right; }
+.num small { display: block; font: 600 13px/1.2 var(--cond); color: var(--ink-dim); margin-top: 3px; }
+.live { display: inline-block; background: var(--onair); color: #fff; font: 700 14px/1 var(--cond); padding: 3px 6px; margin-right: 6px; vertical-align: 3px; }
+
+/* case file under an open listing */
+.file { background: var(--cell-hi); padding: 18px 16px 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.file h4 { font: 700 21px/1 var(--cond); margin: 0 0 10px; color: var(--slot); }
+.bars { display: grid; grid-template-columns: 150px 1fr 36px; gap: 7px 10px; align-items: center; font-size: 15px; }
+.bars .t { height: 12px; background: var(--gap); }
+.bars .f { height: 100%; background: var(--slot); }
+.bars .v { font: 700 19px/1 var(--cond); text-align: right; }
+.bars .d { grid-column: 1 / -1; color: var(--ink-dim); font-size: 13.5px; margin: -4px 0 4px; }
+.tally { columns: 2 220px; column-gap: 22px; }
+.tally div { break-inside: avoid; margin-bottom: 12px; }
+.tally h5 { font: 700 17px/1 var(--cond); margin: 0 0 4px; color: var(--ink-dim); }
+.tally ul { margin: 0; padding: 0; list-style: none; font-size: 15px; }
+.tally li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid rgba(255,255,255,.12); padding: 2px 0; }
+.tally li b { font: 700 17px/1.2 var(--cond); }
+.times { font: 600 14px/1.5 var(--cond); color: var(--ink-dim); }
+blockquote { margin: 0 0 12px; padding-left: 12px; border-left: 4px solid var(--slot); }
+blockquote span { display: block; font: 600 15px/1.2 var(--cond); color: var(--ink-dim); margin-bottom: 3px; }
+.session { white-space: pre-wrap; font-size: 15.5px; max-width: 70ch; }
+.wide { grid-column: 1 / -1; }
+.rundown { font-size: 15px; }
+.rundown span { font: 700 17px/1 var(--cond); color: var(--slot); display: inline-block; min-width: 128px; }
+
+/* profile, patterns, news */
+.panel { background: var(--cell); border: 3px solid var(--gap); padding: 18px; }
+.profile { white-space: pre-wrap; max-width: 72ch; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th { font: 600 16px/1.2 var(--cond); color: var(--ink-dim); text-align: right; padding: 6px 8px; border-bottom: 2px solid var(--gap); }
+td { text-align: right; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,.12); font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; }
+.news { list-style: none; margin: 0; padding: 0; }
+.news li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+.news .d { font: 700 17px/1 var(--cond); color: var(--slot); margin-right: 8px; }
+.news .why { display: block; font-size: 14px; color: var(--ink-dim); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { background: var(--gap); padding: 3px 9px; font-size: 15px; }
+footer { margin: 56px 0 0; background: var(--gap); padding: 22px 0 34px; color: var(--ink-dim); font-size: 14.5px; }
+footer p { margin: 0 0 6px; max-width: 75ch; }
+.empty { padding: 24px; color: var(--ink-dim); background: var(--cell); }
+
+@media (max-width: 760px) {
+  .verdict { grid-template-columns: 1fr; gap: 18px; padding-top: 26px; }
+  .bug { justify-self: start; }
+  .verdict h2 { font-size: 36px; }
+  .key { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .listing { grid-template-columns: 104px 1fr 64px; }
+  .listing .hide-sm { display: none; }
+  .file { grid-template-columns: 1fr; }
+  .bars { grid-template-columns: 118px 1fr 32px; }
+}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <h1 class="brand">The <span>KarmicX</span> Files</h1>
+  <div class="air" id="air"><span class="lamp"></span><span id="airText">Checking the listings</span></div>
+</div></div>
+
+<main class="wrap" id="main" aria-live="polite"></main>
+
+<footer><div class="wrap">
+  <p>Fan made commentary on a public live show. Not affiliated with KarmicX or KXL.</p>
+  <p>Scores come from software listening to the public broadcast: speech to text for the words, and a voice tone model for anger and pitch. Treat anger and mocking voice as rough reads.</p>
+  <p id="updated"></p>
+</div></footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const minus = v => String(v).replace("-", "−");
+const LETTER = { swearing: ["L", "Language"], begging: ["B", "Begging"], chat: ["C", "Reading chat"],
+  catchphrases: ["R", "Repeat bits"], dead_air: ["D", "Dead air"], mocking: ["M", "Mocking voice"] };
+const TALLY = { swearing: "Swearing", begging: "Begging", chat: "Reading chat", catchphrases: "Repeat bits",
+  mocking: "Mocking voice", people: "Dabbleverse names he dropped" };
+
+function fmtT(sec) { sec = Math.max(0, Math.floor(sec)); const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+  return h ? `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}` : `${m}:${String(s).padStart(2, "0")}`; }
+function dur(s) { const m = Math.round(s / 60); return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`; }
+
+function verdictLine(h) {
+  if (h == null) return "Not enough tape yet.";
+  return h < 20 ? "Legit, for now." : h < 40 ? "Mostly legit." : h < 60 ? "Kind of a hack." : h < 80 ? "Hack." : "Total hack.";
+}
+
+async function load() {
+  let d;
+  try { d = await (await fetch("data.json?v=" + Date.now())).json(); }
+  catch { $("#main").innerHTML = `<p class="empty">The listings did not load. Refresh in a minute.</p>`; return; }
+  const live = d.streams.find(s => s.status === "live");
+  $("#air").classList.toggle("on", !!live);
+  $("#airText").textContent = live ? "On air now" : d.streams.length
+    ? `Off air. Last on ${d.streams[0].weekday} ${d.streams[0].date}` : "Off air";
+  $("#updated").textContent = "File last updated " + new Date(d.updated * 1000).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) + ".";
+
+  const c = d.career, high = c.cats.filter(x => x.score != null && x.score >= 40);
+  const keyRows = c.cats.map(x => `<div><b>${LETTER[x.key][0]}</b>${LETTER[x.key][1]} <i>${x.score ?? "n/a"}</i></div>`).join("");
+  let html = `
+  <section class="verdict">
+    <div class="bug" role="img" aria-label="Hack rating ${c.hack ?? "not rated"}">
+      <small>HACK</small><b>${c.hack ?? "NR"}</b>
+      <div class="desc">${high.map(x => LETTER[x.key][0]).join(" ") || "&nbsp;"}</div>
+    </div>
+    <div>
+      <h2>${esc(verdictLine(c.hack))}</h2>
+      <p>${c.streams} stream${c.streams === 1 ? "" : "s"} on file, ${dur(c.listened_s)} of tape. ${c.f.toLocaleString()} F bombs out of ${c.words.toLocaleString()} words, ${c.pct}% of everything he says.
+      The rating is 0 to 100. Letters on the bug are the habits scoring 40 or more.</p>
+      <div class="key">${keyRows}</div>
+    </div>
+  </section>
+
+  <h3 class="sec">On file</h3>
+  <p class="sub">Every stream, newest first. Open one for its case file.</p>
+  <div class="grid" role="list">
+    <div class="listing head" aria-hidden="true"><div>When</div><div>Show</div><div class="num">Hack</div><div class="num hide-sm">F bombs</div><div class="num hide-sm">Anger link</div></div>
+    ${d.streams.map((s, i) => listing(s, i)).join("") || `<div class="empty">No streams on file yet.</div>`}
+  </div>`;
+
+  html += `<h3 class="sec">What we know about him</h3>
+    <div class="panel">${d.profile.ai ? `<div class="profile">${esc(d.profile.ai)}</div>` : `<p class="sub" style="margin:0 0 12px">The file grows after every stream.</p>`}
+    ${d.profile.catchphrases.length ? `<h4 style="font:700 21px/1 var(--cond);margin:16px 0 8px;color:var(--slot)">Repeat bits</h4>
+      <div class="chips">${d.profile.catchphrases.map(p => `<span>"${esc(p[0])}" ${p[1]}</span>`).join("")}</div>` : ""}
+    </div>`;
+
+  const P = d.profile.patterns;
+  if (P.streams >= 2) {
+    const t = (title, rows) => rows.length ? `<h4 style="font:700 21px/1 var(--cond);margin:14px 0 6px;color:var(--slot)">${title}</h4>
+      <table><thead><tr><th></th><th>Streams</th><th>Hack</th><th>Anger</th><th>Swearing</th></tr></thead><tbody>
+      ${rows.map(r => `<tr><td>${esc(r.group)}</td><td>${r.streams}</td><td>${r.hack ?? "n/a"}</td><td>${r.anger ?? "n/a"}</td><td>${r.swearing != null ? r.swearing + "%" : "n/a"}</td></tr>`).join("")}</tbody></table>` : "";
+    html += `<h3 class="sec">When he is at his worst</h3><div class="panel">${t("Time of day", P.daypart)}${t("Day of week", P.weekday)}${t("Show type", P.show_type)}</div>`;
+  }
+
+  if (d.news.length) html += `<h3 class="sec">In the Dabbleverse news</h3><div class="panel"><ul class="news">${d.news.map(n => `<li>
+      <span class="d">${esc(n.date)}</span><a href="${esc(n.url)}" rel="noopener" target="_blank">${esc(n.title)}</a>
+      <span class="why">${n.about_him ? "About him." : ""}${n.he_said.length ? ` He talked about ${esc(n.he_said.join(", "))} on stream that week.` : ""}</span></li>`).join("")}</ul></div>`;
+
+  $("#main").innerHTML = html;
+  document.querySelectorAll("button.show").forEach(b => b.addEventListener("click", () => toggle(b)));
+}
+
+function listing(s, i) {
+  return `<div class="listing" role="listitem" data-i="${i}">
+    <div class="slot">${esc(s.weekday.slice(0, 3))} ${esc(s.date.replace(/, \d{4}$/, ""))}<small>${esc(s.start_clock)}, ${dur(s.listened_s)}</small></div>
+    <button class="show" aria-expanded="false" aria-controls="file${i}">
+      <div class="title">${s.status === "live" ? '<span class="live">LIVE</span>' : ""}${esc(s.title)}<small>${esc(s.show_type)}. ${esc(s.label)}.</small></div></button>
+    <div class="num">${s.hack ?? "n/a"}</div>
+    <div class="num hide-sm">${s.f}<small>${s.pct}% of words</small></div>
+    <div class="num hide-sm">${s.r == null ? "n/a" : minus(s.r.toFixed(2))}<small>${esc(s.link.replace(/ link$/, ""))}</small></div>
+  </div><div id="file${i}" hidden></div>`;
+}
+
+let DATA = null;
+async function toggle(btn) {
+  const row = btn.closest(".listing"), i = +row.dataset.i, box = document.getElementById("file" + i);
+  const open = btn.getAttribute("aria-expanded") === "true";
+  btn.setAttribute("aria-expanded", String(!open)); row.classList.toggle("open", !open);
+  if (open) { box.hidden = true; return; }
+  if (!DATA) DATA = await (await fetch("data.json?v=" + Date.now())).json();
+  box.innerHTML = caseFile(DATA.streams[i]); box.hidden = false;
+}
+
+function caseFile(s) {
+  const bars = s.cats.map(c => `<div>${esc(c.name)}</div><div class="t"><div class="f" style="width:${c.score || 0}%"></div></div>
+    <div class="v">${c.score ?? "n/a"}</div>${c.score != null ? `<div class="d">${c.raw} ${esc(c.unit)}</div>` : `<div class="d">Still learning this one.</div>`}`).join("");
+  const tally = Object.entries(TALLY).map(([k, name]) => (s.tally[k] || []).length ? `<div><h5>${name}</h5><ul>${s.tally[k].map(([w, n, ts]) =>
+    `<li><span>${esc(w)}<br><span class="times">${ts.slice(0, 8).map(fmtT).join(", ")}${ts.length > 8 ? " and more" : ""}</span></span><b>${n}</b></li>`).join("")}</ul></div>` : "").join("");
+  const anger = s.r == null ? "" : `<p>F word and anger: ${esc(s.link.toLowerCase())} (r = ${minus(s.r.toFixed(2))}). ${s.anger_with_f != null ? `His voice read ${s.anger_with_f} out of 100 around an F bomb and ${s.anger_without_f} the rest of the time.` : ""}</p>`;
+  const aud = [s.viewers_avg != null ? `About ${s.viewers_avg} watching, peak ${s.viewers_peak}.` : "", s.superchats ? `${s.superchats} super chats${s.superchat_dollars ? ", $" + s.superchat_dollars.toFixed(2) : ""}.` : ""].join(" ");
+  return `<div class="file">
+    <div><h4>Hack rating ${s.hack ?? "n/a"}</h4><div class="bars">${bars}</div></div>
+    <div><h4>The F word</h4>
+      <p>${s.f} F bombs and ${s.swears} swears in ${s.words.toLocaleString()} words${s.per_hour ? `, about ${s.per_hour} F bombs an hour of talking` : ""}.</p>${anger}
+      ${aud ? `<p>${esc(aud)}</p>` : ""}
+      <h4 style="margin-top:16px">Rundown</h4><div class="rundown">${s.rundown.map(([a, b, k, n]) => `<div><span>${fmtT(a)} to ${fmtT(b)}</span>${esc(n)}</div>`).join("")}</div></div>
+    ${s.flashpoints.length ? `<div class="wide"><h4>Flashpoints</h4>${s.flashpoints.map(p => `<blockquote><span>${p.at} into the stream, anger ${p.anger}</span>"${esc(p.quote)}"</blockquote>`).join("")}</div>` : ""}
+    ${tally ? `<div class="wide"><h4>Counted, with times into the stream</h4><div class="tally">${tally}</div></div>` : ""}
+    ${s.session ? `<div class="wide"><h4>${s.session_by === "claude" ? "Therapy session" : "Session notes"}</h4><div class="session">${esc(s.session)}</div></div>` : ""}
+  </div>`;
+}
+
+load();
+setInterval(() => { DATA = null; if (!document.querySelector(".listing.open")) load(); }, 120000);
+</script>
+</body>
+</html>
