@@ -4,257 +4,324 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The KarmicX Files</title>
-<meta name="description" content="A fan made case file on the KXL live show: the Hack Score, every F bomb, and how the voice heats up, updated after every stream.">
+<meta name="description" content="A fan made tracker for the KXL live show: the Hack Score, every F bomb, the names he drops and how the voice heats up. Updated live.">
 <meta property="og:title" content="The KarmicX Files">
-<meta property="og:description" content="The Hack Score, every F bomb, and how the voice heats up. Updated after every stream.">
+<meta property="og:description" content="KarmicX on the record. The Hack Score, every F bomb, updated live.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231a2a8f'/%3E%3Ctext x='16' y='23' font-family='Arial Narrow,Arial' font-weight='700' font-size='18' text-anchor='middle' fill='%23ffd23f'%3EKX%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e0262d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='900' font-size='15' text-anchor='middle' fill='white'%3EKX%3C/text%3E%3C/svg%3E">
 <style>
-/* Late night cable guide: blue listing blocks, white condensed type, yellow time slots. */
 :root {
-  --guide: #16237a;      /* page */
-  --cell: #2234b0;       /* listing block */
-  --cell-hi: #2c43d0;    /* open or hovered block */
-  --gap: #0b1452;        /* the dark gaps between blocks */
-  --ink: #f4f6ff;
-  --ink-dim: #b3bef5;
-  --slot: #ffd23f;       /* time slots and scores */
-  --onair: #ff5a4a;
-  --cond: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
-  --body: "Source Sans 3", system-ui, sans-serif;
+  --bg: #0e0e10; --bar: #141417; --tile: #1a1a1e; --tile2: #222227; --line: #2b2b31;
+  --text: #f3f3f5; --dim: #a1a1ab; --faint: #6f6f78;
+  --red: #e0262d; --red2: #ff4a50; --redbg: rgba(224, 38, 45, .14);
+  --head: "Archivo", "Arial Black", sans-serif; --body: "Inter", system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
-html { background: var(--guide); }
-body { margin: 0; color: var(--ink); font: 17px/1.55 var(--body); background: var(--guide); }
-a { color: var(--slot); }
-:focus-visible { outline: 3px solid var(--slot); outline-offset: 2px; }
-.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+html, body { background: var(--bg); }
+body { margin: 0; color: var(--text); font: 15px/1.5 var(--body); }
+a { color: var(--text); }
+:focus-visible { outline: 2px solid var(--red2); outline-offset: 2px; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
 
-/* channel bar */
-.bar { background: var(--gap); }
-.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
-.brand { font: 800 26px/1 var(--cond); letter-spacing: .3px; margin: 0; }
-.brand span { color: var(--slot); }
-.air { font: 600 17px/1 var(--cond); display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); }
-.air.on { color: var(--ink); }
-.air .lamp { width: 11px; height: 11px; border-radius: 50%; background: #56609a; }
-.air.on .lamp { background: var(--onair); box-shadow: 0 0 0 4px rgba(255,90,74,.25); }
+/* top bar */
+header { position: sticky; top: 0; z-index: 20; background: var(--bar); border-bottom: 1px solid var(--line); }
+.bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; min-height: 68px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo i { width: 44px; height: 36px; border-radius: 9px; background: var(--red); display: grid; place-items: center;
+  font: 900 17px/1 var(--head); font-style: normal; letter-spacing: -.5px; }
+.logo b { font: 800 19px/1.1 var(--head); }
+.mid { text-align: center; }
+.mid small { display: block; font: 800 12.5px/1 var(--head); letter-spacing: 3px; margin-bottom: 7px; }
+.tabs { display: inline-flex; gap: 4px; background: var(--bg); border: 1px solid var(--line); border-radius: 9px; padding: 3px; }
+.tabs button { all: unset; cursor: pointer; font: 700 11.5px/1 var(--head); letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--dim); padding: 8px 14px; border-radius: 6px; }
+.tabs button[aria-selected="true"] { background: var(--tile2); color: var(--text); }
+.right { justify-self: end; display: flex; align-items: center; gap: 8px; }
+.pill { display: inline-flex; align-items: center; gap: 7px; font: 600 12.5px/1 var(--body); padding: 7px 11px; border-radius: 7px;
+  border: 1px solid var(--line); color: var(--dim); }
+.pill.on { border-color: rgba(224, 38, 45, .55); color: var(--red2); background: var(--redbg); }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); }
+.pill.on .dot { background: var(--red2); animation: blink 1.4s infinite; }
+@keyframes blink { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .pill.on .dot { animation: none; } }
 
-/* the rating bug */
-.verdict { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; padding: 40px 0 34px; }
-.bug { border: 4px solid var(--ink); padding: 10px 18px 6px; text-align: center; min-width: 150px; animation: bugin .9s ease-out both; }
-.bug small { display: block; font: 700 22px/1 var(--cond); letter-spacing: 2px; }
-.bug b { display: block; font: 800 104px/.92 var(--cond); font-variant-numeric: tabular-nums; }
-.bug .desc { display: flex; justify-content: center; gap: 6px; border-top: 3px solid var(--ink); margin-top: 6px; padding-top: 5px; font: 700 20px/1 var(--cond); min-height: 25px; }
-@keyframes bugin { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .bug { animation: none; } }
-.verdict h2 { font: 700 44px/1.02 var(--cond); margin: 0 0 10px; max-width: 18ch; }
-.verdict p { margin: 0; color: var(--ink-dim); max-width: 60ch; }
-.key { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 18px; margin-top: 16px; font-size: 15px; color: var(--ink-dim); }
-.key b { font: 700 18px/1 var(--cond); color: var(--ink); display: inline-block; width: 22px; }
-.key i { font-style: normal; color: var(--slot); font-family: var(--cond); font-weight: 700; font-size: 18px; }
+main.wrap { padding-top: 22px; padding-bottom: 60px; }
+section[hidden] { display: none; }
+main > section { scroll-margin-top: 120px; }
+.grid { display: grid; gap: 16px; }
+.tile { background: var(--tile); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.tile h3 { font: 800 13px/1 var(--head); letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); margin: 0 0 14px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; background: var(--red); color: #fff; font: 800 12px/1 var(--head);
+  letter-spacing: 1px; padding: 6px 9px; border-radius: 6px; }
+.badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+.badge.off { background: rgba(0,0,0,.6); border: 1px solid var(--line); }
+.badge.off::before { display: none; }
 
-/* section heads read like guide headings, sentence case */
-h3.sec { font: 700 30px/1 var(--cond); margin: 44px 0 12px; }
-.sub { color: var(--ink-dim); margin: -4px 0 14px; max-width: 70ch; }
+/* scorecard tab */
+.hero { grid-template-columns: 1.1fr 1.4fr; }
+.rating { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; }
+.rating .num { font: 900 112px/.85 var(--head); letter-spacing: -4px; font-variant-numeric: tabular-nums; }
+.rating .lbl { font: 800 26px/1.1 var(--head); }
+.rating p { color: var(--dim); margin: 8px 0 0; }
+.letters { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.letters span { font: 800 13px/1 var(--head); padding: 6px 8px; border-radius: 6px; background: var(--tile2); color: var(--dim); }
+.letters span.hot { background: var(--redbg); color: var(--red2); }
+.latest { display: grid; grid-template-columns: 1fr auto; gap: 14px; }
+.latest .t { font: 800 22px/1.15 var(--head); margin: 8px 0 4px; }
+.latest .s { color: var(--dim); }
+.bigf { text-align: right; }
+.bigf b { display: block; font: 900 64px/.9 var(--head); color: var(--red2); font-variant-numeric: tabular-nums; }
+.bigf span { color: var(--dim); font-size: 13px; }
+.stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stat b { display: block; font: 800 34px/1 var(--head); font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.stat span { color: var(--dim); font-size: 13.5px; }
+.bars { display: grid; grid-template-columns: 210px 1fr 44px; gap: 12px 14px; align-items: center; }
+.bars .tr { height: 10px; background: var(--tile2); border-radius: 5px; overflow: hidden; }
+.bars .fl { height: 100%; background: var(--red); border-radius: 5px; }
+.bars .v { font: 800 18px/1 var(--head); text-align: right; font-variant-numeric: tabular-nums; }
+.bars .d { grid-column: 1 / -1; color: var(--faint); font-size: 12.5px; margin: -9px 0 0; }
 
-/* listings grid */
-.grid { display: grid; gap: 3px; background: var(--gap); border: 3px solid var(--gap); }
-.listing { display: grid; grid-template-columns: 150px 1fr 90px 90px 110px; gap: 3px; background: var(--gap); }
-.listing > * { background: var(--cell); padding: 10px 12px; }
-.listing.head > * { background: var(--gap); color: var(--ink-dim); font: 600 16px/1.2 var(--cond); padding: 6px 12px; }
-.listing button.show { all: unset; cursor: pointer; display: block; background: var(--cell); padding: 10px 12px; }
-.listing button.show:hover, .listing.open > * { background: var(--cell-hi); }
-.slot { font: 700 20px/1.1 var(--cond); color: var(--slot); }
-.slot small { display: block; font-size: 15px; color: var(--ink-dim); font-weight: 600; }
-.title { font: 700 22px/1.1 var(--cond); }
-.title small { display: block; font: 400 15px/1.3 var(--body); color: var(--ink-dim); margin-top: 3px; }
-.num { font: 700 26px/1 var(--cond); font-variant-numeric: tabular-nums; text-align: right; }
-.num small { display: block; font: 600 13px/1.2 var(--cond); color: var(--ink-dim); margin-top: 3px; }
-.live { display: inline-block; background: var(--onair); color: #fff; font: 700 14px/1 var(--cond); padding: 3px 6px; margin-right: 6px; vertical-align: 3px; }
+/* streams tab */
+.cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card { all: unset; cursor: pointer; display: block; background: var(--tile); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.card:hover { border-color: #44444c; }
+.thumb { position: relative; aspect-ratio: 16 / 9; display: grid; place-items: center;
+  background: radial-gradient(120% 90% at 20% 0%, #3a1214 0%, #17171b 55%, #101013 100%); border-bottom: 2px solid var(--red); }
+.thumb .f { text-align: center; }
+.thumb .f b { display: block; font: 900 74px/.9 var(--head); letter-spacing: -2px; }
+.thumb .f span { font: 800 13px/1 var(--head); letter-spacing: 2px; text-transform: uppercase; color: var(--dim); }
+.thumb .badge { position: absolute; top: 12px; left: 12px; }
+.thumb .hk { position: absolute; top: 12px; right: 12px; font: 800 12px/1 var(--head); background: rgba(0,0,0,.65); border: 1px solid var(--line);
+  padding: 6px 8px; border-radius: 6px; letter-spacing: .5px; }
+.thumb .len { position: absolute; bottom: 10px; right: 12px; font: 600 12px/1 var(--body); background: rgba(0,0,0,.75); padding: 5px 7px; border-radius: 5px; }
+.meta { padding: 12px 14px 14px; }
+.meta .t { font: 700 15.5px/1.3 var(--body); }
+.meta .s { color: var(--dim); font-size: 13px; margin-top: 3px; }
 
-/* case file under an open listing */
-.file { background: var(--cell-hi); padding: 18px 16px 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
-.file h4 { font: 700 21px/1 var(--cond); margin: 0 0 10px; color: var(--slot); }
-.bars { display: grid; grid-template-columns: 150px 1fr 36px; gap: 7px 10px; align-items: center; font-size: 15px; }
-.bars .t { height: 12px; background: var(--gap); }
-.bars .f { height: 100%; background: var(--slot); }
-.bars .v { font: 700 19px/1 var(--cond); text-align: right; }
-.bars .d { grid-column: 1 / -1; color: var(--ink-dim); font-size: 13.5px; margin: -4px 0 4px; }
-.tally { columns: 2 220px; column-gap: 22px; }
-.tally div { break-inside: avoid; margin-bottom: 12px; }
-.tally h5 { font: 700 17px/1 var(--cond); margin: 0 0 4px; color: var(--ink-dim); }
-.tally ul { margin: 0; padding: 0; list-style: none; font-size: 15px; }
-.tally li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid rgba(255,255,255,.12); padding: 2px 0; }
-.tally li b { font: 700 17px/1.2 var(--cond); }
-.times { font: 600 14px/1.5 var(--cond); color: var(--ink-dim); }
-blockquote { margin: 0 0 12px; padding-left: 12px; border-left: 4px solid var(--slot); }
-blockquote span { display: block; font: 600 15px/1.2 var(--cond); color: var(--ink-dim); margin-bottom: 3px; }
-.session { white-space: pre-wrap; font-size: 15.5px; max-width: 70ch; }
-.wide { grid-column: 1 / -1; }
-.rundown { font-size: 15px; }
-.rundown span { font: 700 17px/1 var(--cond); color: var(--slot); display: inline-block; min-width: 128px; }
+/* leaderboard */
+.boards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lb { list-style: none; margin: 0; padding: 0; counter-reset: r; }
+.lb li { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.lb li::before { counter-increment: r; content: counter(r); font: 800 14px/1 var(--head); color: var(--faint); }
+.lb li:first-child::before { color: var(--red2); }
+.lb b { font: 800 17px/1 var(--head); font-variant-numeric: tabular-nums; }
+.lb small { display: block; color: var(--faint); font-size: 12.5px; }
+.q { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.q span { display: block; font: 700 12.5px/1.2 var(--body); color: var(--red2); margin-bottom: 4px; }
 
-/* profile, patterns, news */
-.panel { background: var(--cell); border: 3px solid var(--gap); padding: 18px; }
-.profile { white-space: pre-wrap; max-width: 72ch; }
-table { border-collapse: collapse; width: 100%; font-size: 15px; }
-th { font: 600 16px/1.2 var(--cond); color: var(--ink-dim); text-align: right; padding: 6px 8px; border-bottom: 2px solid var(--gap); }
-td { text-align: right; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,.12); font-variant-numeric: tabular-nums; }
+/* the file */
+.file2 { grid-template-columns: 1.4fr 1fr; align-items: start; }
+.prose { white-space: pre-wrap; color: #dcdce2; max-width: 72ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { background: var(--tile2); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; font-size: 13px; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th { text-align: right; color: var(--faint); font-weight: 600; padding: 6px 6px; border-bottom: 1px solid var(--line); }
+td { text-align: right; padding: 7px 6px; border-bottom: 1px solid var(--line); }
 th:first-child, td:first-child { text-align: left; }
 .news { list-style: none; margin: 0; padding: 0; }
-.news li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
-.news .d { font: 700 17px/1 var(--cond); color: var(--slot); margin-right: 8px; }
-.news .why { display: block; font-size: 14px; color: var(--ink-dim); }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chips span { background: var(--gap); padding: 3px 9px; font-size: 15px; }
-footer { margin: 56px 0 0; background: var(--gap); padding: 22px 0 34px; color: var(--ink-dim); font-size: 14.5px; }
-footer p { margin: 0 0 6px; max-width: 75ch; }
-.empty { padding: 24px; color: var(--ink-dim); background: var(--cell); }
+.news li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.news .d { color: var(--red2); font: 700 12.5px/1 var(--body); margin-right: 8px; }
+.news small { display: block; color: var(--faint); margin-top: 3px; }
+.empty { color: var(--dim); }
 
-@media (max-width: 760px) {
-  .verdict { grid-template-columns: 1fr; gap: 18px; padding-top: 26px; }
-  .bug { justify-self: start; }
-  .verdict h2 { font-size: 36px; }
-  .key { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .listing { grid-template-columns: 104px 1fr 64px; }
-  .listing .hide-sm { display: none; }
-  .file { grid-template-columns: 1fr; }
-  .bars { grid-template-columns: 118px 1fr 32px; }
+/* case file overlay */
+dialog { width: min(980px, calc(100% - 24px)); max-height: calc(100% - 40px); background: var(--tile); color: var(--text);
+  border: 1px solid var(--line); border-radius: 14px; padding: 0; }
+dialog::backdrop { background: rgba(0,0,0,.72); }
+.dhead { position: sticky; top: 0; background: var(--tile); display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.dhead b { font: 800 19px/1.2 var(--head); }
+.dhead button { all: unset; cursor: pointer; font: 700 13px/1 var(--body); padding: 8px 12px; border-radius: 7px; background: var(--tile2); }
+.dbody { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.dbody h4 { font: 800 13px/1 var(--head); letter-spacing: 1.4px; text-transform: uppercase; color: var(--dim); margin: 0 0 12px; }
+.wide { grid-column: 1 / -1; }
+.times { color: var(--faint); font-size: 12px; }
+.tl { list-style: none; margin: 0; padding: 0; columns: 2 260px; column-gap: 24px; }
+.tl li { break-inside: avoid; display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.tl li b { font: 800 15px/1.2 var(--head); }
+.session { white-space: pre-wrap; color: #dcdce2; font-size: 14.5px; }
+
+footer { border-top: 1px solid var(--line); color: var(--faint); font-size: 13px; padding: 24px 0 40px; }
+footer p { margin: 0 0 6px; max-width: 80ch; }
+
+@media (max-width: 980px) {
+  .bar { grid-template-columns: 1fr auto; }
+  .mid { grid-column: 1 / -1; grid-row: 2; padding-bottom: 12px; overflow-x: auto; }
+  .mid small { display: none; }
+  .hero, .file2, .boards { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  .logo b { font-size: 16px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards { grid-template-columns: 1fr; }
+  .rating .num { font-size: 88px; }
+  .bars { grid-template-columns: 130px 1fr 36px; }
+  .dbody { grid-template-columns: 1fr; }
+  .tabs { width: 100%; justify-content: space-between; }
+  .tabs button { padding: 8px 7px; letter-spacing: .3px; font-size: 11px; }
 }
 </style>
 </head>
 <body>
-<div class="bar"><div class="wrap">
-  <h1 class="brand">The <span>KarmicX</span> Files</h1>
-  <div class="air" id="air"><span class="lamp"></span><span id="airText">Checking the listings</span></div>
-</div></div>
+<header><div class="wrap bar">
+  <a class="logo" href="#scorecard"><i>KX</i><b>The KarmicX Files</b></a>
+  <div class="mid">
+    <small>KARMICX, ON THE RECORD</small>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="scorecard" aria-selected="true">Scorecard</button>
+      <button role="tab" data-tab="streams">Streams</button>
+      <button role="tab" data-tab="leaderboard">Leaderboard</button>
+      <button role="tab" data-tab="file">The file</button>
+    </div>
+  </div>
+  <div class="right"><span class="pill" id="air"><span class="dot"></span><span id="airText">Checking</span></span></div>
+</div></header>
 
-<main class="wrap" id="main" aria-live="polite"></main>
+<main class="wrap">
+  <section id="scorecard"></section>
+  <section id="streams" hidden></section>
+  <section id="leaderboard" hidden></section>
+  <section id="file" hidden></section>
+</main>
+
+<dialog id="case"><div class="dhead"><b id="caseTitle"></b><button onclick="document.getElementById('case').close()">Close</button></div><div class="dbody" id="caseBody"></div></dialog>
 
 <footer><div class="wrap">
-  <p>Fan made commentary on a public live show. Not affiliated with KarmicX or KXL.</p>
-  <p>Scores come from software listening to the public broadcast: speech to text for the words, and a voice tone model for anger and pitch. Treat anger and mocking voice as rough reads.</p>
+  <p>Fan made commentary on a public live show. Not affiliated with KarmicX, KXL or any Dabbleverse site.</p>
+  <p>Scores come from software listening to the public broadcast: speech to text for the words, voice prints to tell him apart from clips and guests, and a voice tone model for anger and pitch. Treat anger and mocking voice as rough reads.</p>
   <p id="updated"></p>
 </div></footer>
 
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const short = n => String(n).replace(/\s*\([^)]*\)$/, "");
 const minus = v => String(v).replace("-", "−");
-const LETTER = { swearing: ["L", "Language"], begging: ["B", "Begging"], chat: ["C", "Reading chat"],
-  catchphrases: ["R", "Repeat bits"], dead_air: ["D", "Dead air"], mocking: ["M", "Mocking voice"] };
-const TALLY = { swearing: "Swearing", begging: "Begging", chat: "Reading chat", catchphrases: "Repeat bits",
-  mocking: "Mocking voice", people: "Dabbleverse names he dropped" };
+const LETTER = { swearing: "L", begging: "B", chat: "C", catchphrases: "R", dead_air: "D", mocking: "M", clips: "V" };
+const TALLY = { swearing: "Swearing", begging: "Begging", chat: "Reading chat", catchphrases: "Repeat bits", mocking: "Voices and characters", people: "Dabbleverse names" };
+const KIND = { character: "His character", clip: "Clip or video", guest: "Guest" };
+let D = null;
 
 function fmtT(sec) { sec = Math.max(0, Math.floor(sec)); const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
   return h ? `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}` : `${m}:${String(s).padStart(2, "0")}`; }
 function dur(s) { const m = Math.round(s / 60); return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`; }
+function verdict(h) { return h == null ? "Not rated yet" : h < 20 ? "Legit, for now" : h < 40 ? "Mostly legit" : h < 60 ? "Kind of a hack" : h < 80 ? "Hack" : "Total hack"; }
 
-function verdictLine(h) {
-  if (h == null) return "Not enough tape yet.";
-  return h < 20 ? "Legit, for now." : h < 40 ? "Mostly legit." : h < 60 ? "Kind of a hack." : h < 80 ? "Hack." : "Total hack.";
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => show(b.dataset.tab)));
+window.addEventListener("hashchange", () => show(location.hash.slice(1) || "scorecard", true));
+function show(tab, fromHash) {
+  if (!["scorecard", "streams", "leaderboard", "file"].includes(tab)) tab = "scorecard";
+  document.querySelectorAll("main > section").forEach(s => s.hidden = s.id !== tab);
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+  if (!fromHash) history.replaceState(null, "", "#" + tab);
+  window.scrollTo(0, 0);
 }
 
 async function load() {
-  let d;
-  try { d = await (await fetch("data.json?v=" + Date.now())).json(); }
-  catch { $("#main").innerHTML = `<p class="empty">The listings did not load. Refresh in a minute.</p>`; return; }
-  const live = d.streams.find(s => s.status === "live");
+  try { D = await (await fetch("data.json?v=" + Date.now())).json(); }
+  catch { $("#scorecard").innerHTML = `<p class="empty">The file did not load. Refresh in a minute.</p>`; return; }
+  const live = D.streams.find(s => s.status === "live");
   $("#air").classList.toggle("on", !!live);
-  $("#airText").textContent = live ? "On air now" : d.streams.length
-    ? `Off air. Last on ${d.streams[0].weekday} ${d.streams[0].date}` : "Off air";
-  $("#updated").textContent = "File last updated " + new Date(d.updated * 1000).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) + ".";
+  $("#airText").textContent = live ? "Live now" : D.streams.length ? `Off air since ${D.streams[0].date.replace(/, \d{4}$/, "")}` : "Off air";
+  $("#updated").textContent = "Updated " + new Date(D.updated * 1000).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) + ". Refreshes on its own while he is live.";
+  scorecard(live); streams(); leaderboard(); file();
+  show(location.hash.slice(1) || "scorecard", true);
+}
 
-  const c = d.career, high = c.cats.filter(x => x.score != null && x.score >= 40);
-  const keyRows = c.cats.map(x => `<div><b>${LETTER[x.key][0]}</b>${LETTER[x.key][1]} <i>${x.score ?? "n/a"}</i></div>`).join("");
-  let html = `
-  <section class="verdict">
-    <div class="bug" role="img" aria-label="Hack rating ${c.hack ?? "not rated"}">
-      <small>HACK</small><b>${c.hack ?? "NR"}</b>
-      <div class="desc">${high.map(x => LETTER[x.key][0]).join(" ") || "&nbsp;"}</div>
-    </div>
-    <div>
-      <h2>${esc(verdictLine(c.hack))}</h2>
-      <p>${c.streams} stream${c.streams === 1 ? "" : "s"} on file, ${dur(c.listened_s)} of tape. ${c.f.toLocaleString()} F bombs out of ${c.words.toLocaleString()} words, ${c.pct}% of everything he says.
-      The rating is 0 to 100. Letters on the bug are the habits scoring 40 or more.</p>
-      <div class="key">${keyRows}</div>
-    </div>
-  </section>
+function scorecard(live) {
+  const c = D.career, s = live || D.streams[0];
+  const hot = new Set(c.cats.filter(x => x.score != null && x.score >= 40).map(x => x.key));
+  $("#scorecard").innerHTML = `
+  <div class="grid hero">
+    <div class="tile"><h3>Hack rating</h3>
+      <div class="rating"><div class="num">${c.hack ?? "NR"}</div>
+        <div><div class="lbl">${esc(verdict(c.hack))}</div>
+          <p>${c.streams} stream${c.streams === 1 ? "" : "s"} on file, ${dur(c.listened_s)} of tape. 0 is legit, 100 is a total hack.</p>
+          <div class="letters">${c.cats.map(x => `<span class="${hot.has(x.key) ? "hot" : ""}" title="${esc(x.name)}">${LETTER[x.key] || "?"} ${x.score ?? "n/a"}</span>`).join("")}</div></div></div></div>
+    ${s ? `<div class="tile"><h3>${live ? "On air now" : "Latest stream"}</h3>
+      <div class="latest"><div>${live ? '<span class="badge">LIVE</span>' : `<span class="badge off">${esc(s.weekday)} ${esc(s.start_clock)}</span>`}
+        <div class="t">${esc(s.title)}</div>
+        <div class="s">${esc(s.show_type)}, ${dur(s.listened_s)}${s.viewers_avg != null ? `, about ${s.viewers_avg} watching` : ""}. Hack ${s.hack ?? "n/a"}, ${esc(s.label.toLowerCase())}.</div>
+        <div class="s" style="margin-top:10px">F word and anger: ${esc(s.link.toLowerCase())}${s.r != null ? ` (r = ${minus(s.r.toFixed(2))})` : ""}.</div>
+        <div style="margin-top:14px"><button class="badge off" style="cursor:pointer;border:1px solid var(--line)" onclick="openCase('${esc(s.id)}')">Open the case file</button></div></div>
+        <div class="bigf"><b>${s.f}</b><span>F bombs<br>${s.pct}% of his words</span></div></div></div>` : `<div class="tile empty">No streams on file yet.</div>`}
+  </div>
+  <div class="grid stats" style="margin-top:16px">
+    <div class="tile stat"><b>${c.f.toLocaleString()}</b><span>F bombs on file</span></div>
+    <div class="tile stat"><b>${c.pct}%</b><span>of everything he says</span></div>
+    <div class="tile stat"><b>${c.swears.toLocaleString()}</b><span>swears in total</span></div>
+    <div class="tile stat"><b>${c.words.toLocaleString()}</b><span>words on the record</span></div>
+  </div>
+  <div class="tile" style="margin-top:16px"><h3>Hack habits, 0 to 100</h3><div class="bars">
+    ${c.cats.map(x => `<div>${esc(x.name)}</div><div class="tr"><div class="fl" style="width:${x.score || 0}%"></div></div><div class="v">${x.score ?? "n/a"}</div>`).join("")}
+  </div></div>`;
+}
 
-  <h3 class="sec">On file</h3>
-  <p class="sub">Every stream, newest first. Open one for its case file.</p>
-  <div class="grid" role="list">
-    <div class="listing head" aria-hidden="true"><div>When</div><div>Show</div><div class="num">Hack</div><div class="num hide-sm">F bombs</div><div class="num hide-sm">Anger link</div></div>
-    ${d.streams.map((s, i) => listing(s, i)).join("") || `<div class="empty">No streams on file yet.</div>`}
+function streams() {
+  $("#streams").innerHTML = D.streams.length ? `<div class="grid cards">${D.streams.map(s => `
+    <button class="card" onclick="openCase('${esc(s.id)}')" aria-label="Open ${esc(s.title)}">
+      <div class="thumb">${s.status === "live" ? '<span class="badge">LIVE</span>' : `<span class="badge off">${esc(s.date.replace(/, \d{4}$/, ""))}</span>`}
+        <span class="hk">HACK ${s.hack ?? "NR"}</span>
+        <div class="f"><b>${s.f}</b><span>F bombs</span></div><span class="len">${dur(s.listened_s)}</span></div>
+      <div class="meta"><div class="t">${esc(s.title)}</div>
+        <div class="s">${esc(s.weekday)} ${esc(s.start_clock)}. ${esc(s.show_type)}. ${s.pct}% of his words.</div></div>
+    </button>`).join("")}</div>` : `<p class="empty">No streams on file yet.</p>`;
+}
+
+function board(title, rows, fmt) {
+  return `<div class="tile"><h3>${title}</h3>${rows.length ? `<ol class="lb">${rows.map(fmt).join("")}</ol>` : `<p class="empty">Nothing yet.</p>`}</div>`;
+}
+function leaderboard() {
+  const L = D.leaders;
+  $("#leaderboard").innerHTML = `<div class="grid boards">
+    ${board("Names he drops", L.people, ([n, c]) => `<li><span>${esc(short(n))}</span><b>${c}</b></li>`)}
+    ${board("His go to swears", L.swears, ([w, c]) => `<li><span>${esc(w)}</span><b>${c}</b></li>`)}
+    ${board("Biggest F bomb streams", L.streams_by_f, ([id, t, d, f, p]) => `<li><span><a href="#streams" onclick="openCase('${esc(id)}');return false">${esc(t)}</a><small>${esc(d)}, ${p}% of his words</small></span><b>${f}</b></li>`)}
+    <div class="tile"><h3>Hottest moments</h3>${L.hottest.length ? L.hottest.map(h => `<div class="q"><span>Anger ${h.anger}, ${esc(h.date)}, ${h.at} in</span>"${esc(h.quote)}"</div>`).join("") : `<p class="empty">Nothing yet.</p>`}</div>
+    ${L.cast.length ? board("The cast: characters, clips and guests", L.cast, ([n, k, s]) => `<li><span>${esc(n)}<small>${esc(KIND[k] || k)}</small></span><b>${dur(s)}</b></li>`) : ""}
   </div>`;
-
-  html += `<h3 class="sec">What we know about him</h3>
-    <div class="panel">${d.profile.ai ? `<div class="profile">${esc(d.profile.ai)}</div>` : `<p class="sub" style="margin:0 0 12px">The file grows after every stream.</p>`}
-    ${d.profile.catchphrases.length ? `<h4 style="font:700 21px/1 var(--cond);margin:16px 0 8px;color:var(--slot)">Repeat bits</h4>
-      <div class="chips">${d.profile.catchphrases.map(p => `<span>"${esc(p[0])}" ${p[1]}</span>`).join("")}</div>` : ""}
-    </div>`;
-
-  const P = d.profile.patterns;
-  if (P.streams >= 2) {
-    const t = (title, rows) => rows.length ? `<h4 style="font:700 21px/1 var(--cond);margin:14px 0 6px;color:var(--slot)">${title}</h4>
-      <table><thead><tr><th></th><th>Streams</th><th>Hack</th><th>Anger</th><th>Swearing</th></tr></thead><tbody>
-      ${rows.map(r => `<tr><td>${esc(r.group)}</td><td>${r.streams}</td><td>${r.hack ?? "n/a"}</td><td>${r.anger ?? "n/a"}</td><td>${r.swearing != null ? r.swearing + "%" : "n/a"}</td></tr>`).join("")}</tbody></table>` : "";
-    html += `<h3 class="sec">When he is at his worst</h3><div class="panel">${t("Time of day", P.daypart)}${t("Day of week", P.weekday)}${t("Show type", P.show_type)}</div>`;
-  }
-
-  if (d.news.length) html += `<h3 class="sec">In the Dabbleverse news</h3><div class="panel"><ul class="news">${d.news.map(n => `<li>
-      <span class="d">${esc(n.date)}</span><a href="${esc(n.url)}" rel="noopener" target="_blank">${esc(n.title)}</a>
-      <span class="why">${n.about_him ? "About him." : ""}${n.he_said.length ? ` He talked about ${esc(n.he_said.join(", "))} on stream that week.` : ""}</span></li>`).join("")}</ul></div>`;
-
-  $("#main").innerHTML = html;
-  document.querySelectorAll("button.show").forEach(b => b.addEventListener("click", () => toggle(b)));
 }
 
-function listing(s, i) {
-  return `<div class="listing" role="listitem" data-i="${i}">
-    <div class="slot">${esc(s.weekday.slice(0, 3))} ${esc(s.date.replace(/, \d{4}$/, ""))}<small>${esc(s.start_clock)}, ${dur(s.listened_s)}</small></div>
-    <button class="show" aria-expanded="false" aria-controls="file${i}">
-      <div class="title">${s.status === "live" ? '<span class="live">LIVE</span>' : ""}${esc(s.title)}<small>${esc(s.show_type)}. ${esc(s.label)}.</small></div></button>
-    <div class="num">${s.hack ?? "n/a"}</div>
-    <div class="num hide-sm">${s.f}<small>${s.pct}% of words</small></div>
-    <div class="num hide-sm">${s.r == null ? "n/a" : minus(s.r.toFixed(2))}<small>${esc(s.link.replace(/ link$/, ""))}</small></div>
-  </div><div id="file${i}" hidden></div>`;
+function file() {
+  const P = D.profile, pt = P.patterns;
+  const tbl = (title, rows) => rows.length ? `<h3 style="margin-top:18px">${title}</h3><table><thead><tr><th></th><th>Streams</th><th>Hack</th><th>Anger</th><th>Swearing</th></tr></thead><tbody>
+    ${rows.map(r => `<tr><td>${esc(r.group)}</td><td>${r.streams}</td><td>${r.hack ?? "n/a"}</td><td>${r.anger ?? "n/a"}</td><td>${r.swearing != null ? r.swearing + "%" : "n/a"}</td></tr>`).join("")}</tbody></table>` : "";
+  $("#file").innerHTML = `<div class="grid file2">
+    <div class="tile"><h3>What we know about him</h3>${P.ai ? `<div class="prose">${esc(P.ai)}</div>` : `<p class="empty">The profile fills in as streams come in.</p>`}
+      ${P.catchphrases.length ? `<h3 style="margin-top:20px">Repeat bits</h3><div class="chips">${P.catchphrases.map(p => `<span>"${esc(p[0])}" ${p[1]}</span>`).join("")}</div>` : ""}</div>
+    <div class="grid">
+      <div class="tile"><h3>When he streams</h3>${pt.streams >= 2 ? tbl("Time of day", pt.daypart) + tbl("Show type", pt.show_type) : `<p class="empty">Shows up after a few streams.</p>`}</div>
+      <div class="tile"><h3>In the Dabbleverse news</h3>${D.news.length ? `<ul class="news">${D.news.map(n => `<li><span class="d">${esc(n.date)}</span><a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+        <small>${n.about_him ? "About him." : ""}${n.he_said.length ? ` He talked about ${esc(n.he_said.join(", "))} that week.` : ""}</small></li>`).join("")}</ul>` : `<p class="empty">Nothing linked yet.</p>`}</div>
+    </div></div>`;
 }
 
-let DATA = null;
-async function toggle(btn) {
-  const row = btn.closest(".listing"), i = +row.dataset.i, box = document.getElementById("file" + i);
-  const open = btn.getAttribute("aria-expanded") === "true";
-  btn.setAttribute("aria-expanded", String(!open)); row.classList.toggle("open", !open);
-  if (open) { box.hidden = true; return; }
-  if (!DATA) DATA = await (await fetch("data.json?v=" + Date.now())).json();
-  box.innerHTML = caseFile(DATA.streams[i]); box.hidden = false;
-}
-
-function caseFile(s) {
-  const bars = s.cats.map(c => `<div>${esc(c.name)}</div><div class="t"><div class="f" style="width:${c.score || 0}%"></div></div>
-    <div class="v">${c.score ?? "n/a"}</div>${c.score != null ? `<div class="d">${c.raw} ${esc(c.unit)}</div>` : `<div class="d">Still learning this one.</div>`}`).join("");
-  const tally = Object.entries(TALLY).map(([k, name]) => (s.tally[k] || []).length ? `<div><h5>${name}</h5><ul>${s.tally[k].map(([w, n, ts]) =>
-    `<li><span>${esc(w)}<br><span class="times">${ts.slice(0, 8).map(fmtT).join(", ")}${ts.length > 8 ? " and more" : ""}</span></span><b>${n}</b></li>`).join("")}</ul></div>` : "").join("");
-  const anger = s.r == null ? "" : `<p>F word and anger: ${esc(s.link.toLowerCase())} (r = ${minus(s.r.toFixed(2))}). ${s.anger_with_f != null ? `His voice read ${s.anger_with_f} out of 100 around an F bomb and ${s.anger_without_f} the rest of the time.` : ""}</p>`;
-  const aud = [s.viewers_avg != null ? `About ${s.viewers_avg} watching, peak ${s.viewers_peak}.` : "", s.superchats ? `${s.superchats} super chats${s.superchat_dollars ? ", $" + s.superchat_dollars.toFixed(2) : ""}.` : ""].join(" ");
-  return `<div class="file">
+function openCase(id) {
+  const s = D.streams.find(x => x.id === id); if (!s) return;
+  $("#caseTitle").textContent = `${s.title}, ${s.weekday} ${s.start_clock}`;
+  const bars = s.cats.map(c => `<div>${esc(c.name)}</div><div class="tr"><div class="fl" style="width:${c.score || 0}%"></div></div><div class="v">${c.score ?? "n/a"}</div>
+    <div class="d">${c.score != null ? `${c.raw} ${esc(c.unit)}` : "Still learning this one"}</div>`).join("");
+  const tally = Object.entries(TALLY).map(([k, n]) => (s.tally[k] || []).length ? `<div class="wide"><h4>${n}</h4><ul class="tl">${s.tally[k].map(([w, c, ts]) =>
+    `<li><span>${esc(short(w))}<br><span class="times">${ts.slice(0, 8).map(fmtT).join(", ")}${ts.length > 8 ? " and more" : ""}</span></span><b>${c}</b></li>`).join("")}</ul></div>` : "").join("");
+  const voices = (s.voices || []).filter(v => v.kind !== "host");
+  $("#caseBody").innerHTML = `
     <div><h4>Hack rating ${s.hack ?? "n/a"}</h4><div class="bars">${bars}</div></div>
-    <div><h4>The F word</h4>
-      <p>${s.f} F bombs and ${s.swears} swears in ${s.words.toLocaleString()} words${s.per_hour ? `, about ${s.per_hour} F bombs an hour of talking` : ""}.</p>${anger}
-      ${aud ? `<p>${esc(aud)}</p>` : ""}
-      <h4 style="margin-top:16px">Rundown</h4><div class="rundown">${s.rundown.map(([a, b, k, n]) => `<div><span>${fmtT(a)} to ${fmtT(b)}</span>${esc(n)}</div>`).join("")}</div></div>
-    ${s.flashpoints.length ? `<div class="wide"><h4>Flashpoints</h4>${s.flashpoints.map(p => `<blockquote><span>${p.at} into the stream, anger ${p.anger}</span>"${esc(p.quote)}"</blockquote>`).join("")}</div>` : ""}
-    ${tally ? `<div class="wide"><h4>Counted, with times into the stream</h4><div class="tally">${tally}</div></div>` : ""}
-    ${s.session ? `<div class="wide"><h4>${s.session_by === "claude" ? "Therapy session" : "Session notes"}</h4><div class="session">${esc(s.session)}</div></div>` : ""}
-  </div>`;
+    <div><h4>The F word</h4><p>${s.f} F bombs and ${s.swears} swears in ${s.words.toLocaleString()} of his words${s.per_hour ? `, about ${s.per_hour} F bombs an hour of talking` : ""}.</p>
+      ${s.r != null ? `<p>F word and anger: ${esc(s.link.toLowerCase())} (r = ${minus(s.r.toFixed(2))}).${s.anger_with_f != null ? ` His voice read ${s.anger_with_f} out of 100 around an F bomb and ${s.anger_without_f} the rest of the time.` : ""}</p>` : ""}
+      ${voices.length ? `<h4 style="margin-top:18px">Who else was on</h4><p>${voices.map(v => `${esc(v.name)} (${esc(KIND[v.kind] || v.kind)}, ${dur(v.secs)})`).join(", ")}</p>` : ""}
+      <h4 style="margin-top:18px">Rundown</h4>${s.rundown.map(([a, b, k, n]) => `<div>${fmtT(a)} to ${fmtT(b)}: ${esc(n)}</div>`).join("")}</div>
+    ${s.flashpoints.length ? `<div class="wide"><h4>Flashpoints</h4>${s.flashpoints.map(p => `<div class="q"><span>${p.at} in, anger ${p.anger}</span>"${esc(p.quote)}"</div>`).join("")}</div>` : ""}
+    ${tally}
+    ${s.session ? `<div class="wide"><h4>${s.session_by === "claude" ? "Therapy session" : "Session notes"}</h4><div class="session">${esc(s.session)}</div></div>` : ""}`;
+  $("#case").showModal();
 }
 
 load();
-setInterval(() => { DATA = null; if (!document.querySelector(".listing.open")) load(); }, 120000);
+setInterval(() => { if (!$("#case").open) load(); }, 60000);
 </script>
 </body>
 </html>
