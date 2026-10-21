@@ -117,6 +117,42 @@ main > section { scroll-margin-top: 120px; }
 .chipr span b { color: var(--dim); margin-left: 4px; font-weight: 700; }
 .chipr.hot span { border-color: rgba(224, 38, 45, .5); }
 .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+/* tough guy meter */
+.duo { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; margin-top: 16px; }
+.meter { display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: center; }
+.tank { position: relative; height: 210px; border-radius: 16px; background: var(--tile2); border: 1px solid var(--line); overflow: hidden; }
+.tank .fill { position: absolute; left: 0; right: 0; bottom: 0; transition: height .8s ease; }
+.tank b { position: absolute; inset: 0; display: grid; place-items: center; font: 900 34px/1 var(--head); font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.stamp { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-14deg); border: 3px solid var(--red2); color: var(--red2);
+  font: 900 17px/1 var(--head); letter-spacing: 1px; padding: 6px 8px; border-radius: 6px; background: rgba(14,14,16,.85); white-space: nowrap; }
+.mstate { font: 900 26px/1.05 var(--head); }
+.mstate.s-tough { color: #f3f3f5; } .mstate.s-rattled { color: #f5a524; } .mstate.s-losing { color: #ff7a3d; } .mstate.s-lost { color: var(--red2); }
+.f-tough { background: #e9e9ee; } .f-rattled { background: #f5a524; } .f-losing { background: #ff7a3d; } .f-lost { background: var(--red2); }
+.mline svg { display: block; width: 100%; height: auto; margin-top: 14px; }
+/* internet height */
+.height { display: grid; grid-template-columns: 240px 1fr; gap: 26px; align-items: start; }
+.height svg { display: block; width: 100%; height: auto; }
+.hbig { font: 900 64px/.9 var(--head); color: var(--red2); letter-spacing: -2px; }
+.hsub { color: var(--dim); margin-top: 8px; }
+.hrow { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.hrow b { font: 800 15px/1.2 var(--head); }
+.hrow span { color: var(--dim); font-size: 13px; }
+.hrow em { font-style: normal; font: 800 15px/1.2 var(--head); color: var(--red2); text-align: right; }
+.hrow .q { grid-column: 1 / -1; color: #dcdce2; font-size: 13.5px; }
+.hhero { text-align: center; padding: 26px 22px 22px; background: radial-gradient(90% 120% at 50% 0%, #3a1214 0%, #1a1a1e 62%); }
+.hhero h3 { text-align: center; font-size: 13.5px; letter-spacing: 2.5px; }
+.hh { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; margin-top: 6px; }
+.hh svg { width: 280px; max-width: 100%; }
+.hh .hbig { font-size: 120px; letter-spacing: -4px; }
+.hh .hsub { font-size: 17px; max-width: 30ch; margin: 10px auto 0; }
+.hcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; max-width: 980px; margin: 22px auto 0; text-align: left; }
+.hcard { background: var(--tile2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.hcard em { display: block; font: 900 24px/1 var(--head); color: var(--red2); font-style: normal; }
+.hcard b { display: block; font: 800 14.5px/1.25 var(--head); margin-top: 6px; }
+.hcard span { color: var(--dim); font-size: 12.5px; }
+.hcard .hq { color: #dcdce2; font-size: 13px; margin-top: 8px; }
+.hhero .note { max-width: 760px; margin: 16px auto 0; }
 .tl { display: flex; height: 22px; border-radius: 6px; overflow: hidden; gap: 1px; margin-top: 4px; }
 .tl i { display: block; height: 100%; min-width: 3px; }
 
@@ -190,6 +226,7 @@ footer p { margin: 0 0 6px; max-width: 80ch; }
   .hero, .file2, .boards { grid-template-columns: 1fr; }
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tc-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .duo { grid-template-columns: 1fr; }
   .tc-body { grid-template-columns: 1fr; } .tc-body > div + div { border-left: 0; border-top: 1px solid var(--line); }
 }
 @media (max-width: 640px) {
@@ -202,6 +239,9 @@ footer p { margin: 0 0 6px; max-width: 80ch; }
   .tc-hack b { font-size: 64px; } .tc-read, .tc-body > div, .tc-chips { padding-left: 16px; padding-right: 16px; }
   .tc-chips { grid-template-columns: 1fr; } .bars.sm { grid-template-columns: 112px 1fr 32px; }
   .pgrid { grid-template-columns: 1fr; }
+  .meter { grid-template-columns: 80px 1fr; } .tank { height: 170px; }
+  .height { grid-template-columns: 1fr; } .height svg { max-width: 260px; margin: 0 auto; } .hbig { font-size: 52px; }
+  .hh { gap: 8px; } .hh svg { width: 230px; } .hh .hbig { font-size: 84px; } .hhero { padding: 20px 16px; }
   .bars { grid-template-columns: 130px 1fr 36px; }
   .dbody { grid-template-columns: 1fr; }
   .tabs { width: 100%; justify-content: space-between; }
@@ -285,11 +325,77 @@ function traitBars(traits) {
 }
 function chipr(rows, fmt, none, hot) { return rows && rows.length ? `<div class="chipr${hot ? " hot" : ""}">${rows.map(fmt).join("")}</div>` : `<p class="note" style="margin:0">${none}</p>`; }
 
+const mstate = v => v == null ? null : v >= 70 ? ["tough", "Tough guy"] : v >= 40 ? ["rattled", "Getting rattled"] : v > 10 ? ["losing", "Losing it"] : ["lost", "LOST IT"];
+function meterLine(m) {
+  const S = m.series || []; if (S.length < 2) return "";
+  const W = 320, H = 70, n = S.length, x = i => 4 + (W - 8) * i / (n - 1), y = v => 4 + (H - 8) * (1 - v / 100);
+  const pts = S.map((p, i) => `${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(" ");
+  const li = S.findIndex(p => p[0] * 60 === m.low_at);
+  return `<div class="mline"><svg viewBox="0 0 ${W} ${H + 14}" role="img" aria-label="Tough guy meter through the stream">
+    <line x1="4" x2="${W - 4}" y1="${y(40)}" y2="${y(40)}" stroke="#3a3a42" stroke-dasharray="3 4"/>
+    <line x1="4" x2="${W - 4}" y1="${y(10)}" y2="${y(10)}" stroke="#5a1a1d" stroke-dasharray="3 4"/>
+    <polygon points="4,${y(0)} ${pts} ${W - 4},${y(0)}" fill="rgba(224,38,45,.12)"/>
+    <polyline points="${pts}" fill="none" stroke="#ff4a50" stroke-width="2" stroke-linejoin="round"/>
+    ${li >= 0 ? `<circle cx="${x(li)}" cy="${y(S[li][1])}" r="4" fill="#ff4a50"/>` : ""}
+    <text x="4" y="${H + 12}" font-size="10" fill="#6f6f78">0:00</text><text x="${W - 4}" y="${H + 12}" font-size="10" fill="#6f6f78" text-anchor="end">${fmtT(S[n - 1][0] * 60)}</text>
+  </svg></div>`;
+}
+function meterTile(s, live) {
+  const m = s && s.meter;
+  if (!m) return `<div class="tile"><h3>Tough guy meter</h3><p class="note" style="margin:0">Shows up once he has talked for a few minutes.</p></div>`;
+  const v = live ? m.now : m.low, [cls, label] = mstate(v), MT = D.meter || {};
+  return `<div class="tile"><h3>Tough guy meter</h3>
+    <div class="meter"><div class="tank"><div class="fill f-${cls}" style="height:${v}%"></div><b>${v}</b>${cls === "lost" ? '<span class="stamp">LOST IT</span>' : ""}</div>
+      <div><div class="mstate s-${cls}">${label}</div>
+        <p style="color:var(--dim);margin:8px 0 0">${live ? "Right now. Updates every 10 minutes while he is live." : `The lowest it got last stream, ${fmtT(m.low_at)} in.`}</p>
+        ${m.quote && !live ? `<p style="margin:8px 0 0;font-size:14px">"${esc(m.quote[1])}"</p>` : ""}
+        <p class="note">Drains when his voice runs hot, when he yells and when he throws insults. Refills when he calms down.</p></div></div>
+    ${meterLine(m)}
+    <p class="note">Lost it ${MT.lost || 0} time${MT.lost === 1 ? "" : "s"} across ${MT.streams || 0} stream${MT.streams === 1 ? "" : "s"} on file.</p></div>`;
+}
+
+function lineup(h) {
+  const top = 12, bot = 290, lo = 54, hi = 78, y = i => top + (hi - i) * (bot - top) / (hi - lo), W = 240;
+  let g = "";
+  for (let i = lo; i <= hi; i += 2) {
+    const major = i % 6 === 0;
+    g += `<line x1="38" x2="${W - 4}" y1="${y(i)}" y2="${y(i)}" stroke="${major ? "#3a3a42" : "#26262c"}" stroke-width="${major ? 1.5 : 1}"/>`;
+    if (major) g += `<text x="32" y="${y(i) + 4}" font-size="11" fill="#6f6f78" text-anchor="end">${Math.floor(i / 12)}'${i % 12}"</text>`;
+  }
+  const yc = y(h.claimed), yh = y(h.height), cx = 140, head = 13;
+  return `<svg viewBox="0 0 ${W} ${bot + 10}" role="img" aria-label="Height chart: says ${esc(h.claimed_txt)}, internet height ${esc(h.height_txt)}">
+    <rect x="38" y="${yc}" width="${W - 42}" height="${Math.max(0, yh - yc)}" fill="rgba(224,38,45,.13)"/>
+    ${g}
+    <g fill="#2f2f36">
+      <circle cx="${cx}" cy="${yh + head}" r="${head}"/>
+      <path d="M${cx - 30},${bot} L${cx - 26},${yh + 2 * head + 30} Q${cx - 26},${yh + 2 * head + 4} ${cx},${yh + 2 * head + 4} Q${cx + 26},${yh + 2 * head + 4} ${cx + 26},${yh + 2 * head + 30} L${cx + 30},${bot} Z"/>
+    </g>
+    <line x1="38" x2="${W - 4}" y1="${yc}" y2="${yc}" stroke="#a1a1ab" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="${W - 6}" y="${yc - 5}" font-size="11.5" fill="#a1a1ab" text-anchor="end">Says ${esc(h.claimed_txt)}</text>
+    <line x1="38" x2="${W - 4}" y1="${yh}" y2="${yh}" stroke="#ff4a50" stroke-width="3"/>
+    <text x="${W - 6}" y="${yh + 16}" font-size="12" font-weight="800" fill="#ff4a50" text-anchor="end">${esc(h.height_txt)}</text>
+  </svg>`;
+}
+function heightTile() {
+  const h = D.height; if (!h) return "";
+  const rows = h.parts.filter(p => p.off > 0 || p.count > 0);
+  const ex = p => p.key === "insult" || p.key === "meter" ? "" : (p.examples || []).slice(0, 1).map(x => `<div class="hq">"${esc(x[3])}"</div>`).join("");
+  return `<div class="tile hhero"><h3>Internet height</h3>
+    <div class="hh">${lineup(h)}
+      <div><div class="hbig">${esc(h.height_txt)}</div>
+        <div class="hsub">He says he is ${esc(h.claimed_txt)}. The cope took ${h.off} inches off.</div></div></div>
+    <div class="hcards">${rows.map(p => `<div class="hcard"><em>${p.off} in</em><b>${esc(p.label)}</b>
+      <span>${p.key === "meter" ? `average low of ${p.avg_low} across ${p.count} streams` : `${p.count} time${p.count === 1 ? "" : "s"}, ${p.per_hour} an hour of talking`}</span>${ex(p)}</div>`).join("")
+      || `<p class="note">No cope on file yet.</p>`}</div>
+    <p class="note">A joke score from what he says on air, measured over ${h.hours} hours of him talking. Not his real height. Every "say it to my face", every "I'm not even mad", the haters talk, the insults and every Tough Guy Meter drop takes a little off.</p></div>`;
+}
+
 function scorecard(live) {
   const c = D.career, s = live || D.streams[0], K = D.card || { traits: [], obsessions: [], goes_after: [], talks_up: [], triggers: [] };
   const P = partsOf(c);
-  $("#scorecard").innerHTML = `
-  <div class="tcard">
+  const HT = heightTile();
+  $("#scorecard").innerHTML = `${HT}
+  <div class="tcard"${HT ? ' style="margin-top:16px"' : ""}>
     <div class="tc-head"><div class="tc-id"><i>KX</i><div><b>KarmicX</b><small>KXL. ${c.streams} stream${c.streams === 1 ? "" : "s"} on file, ${dur(c.listened_s)} of tape.</small></div></div>
       <div class="tc-hack"><small>Hack rating</small><b>${c.hack ?? "NR"}</b><span>${esc(verdict(c.hack))}</span></div></div>
     <div class="tc-read">${K.read ? esc(K.read) : "The read shows up after his first full stream."}
@@ -305,13 +411,16 @@ function scorecard(live) {
       <div><h3>Gets heated about</h3>${chipr(K.triggers, t => `<span>${esc(short(t[0]))}<b>${t[1]}</b></span>`, "Nothing clear yet.")}</div>
     </div>
   </div>
-  ${s ? `<div class="tile" style="margin-top:16px"><h3>${live ? "On air now" : "Latest stream"}</h3>
+  <div class="duo">
+  ${s ? `<div class="tile"><h3>${live ? "On air now" : "Latest stream"}</h3>
       <div class="latest"><div>${live ? '<span class="badge">LIVE</span>' : `<span class="badge off">${esc(s.weekday)} ${esc(s.start_clock)}</span>`}
         <div class="t">${esc(s.title)}</div>
         <div class="s">${esc(s.show_type)}, ${dur(s.listened_s)}${s.viewers_avg != null ? `, about ${s.viewers_avg} watching` : ""}. Hack ${s.hack ?? "n/a"}, ${esc(s.label.toLowerCase())}.</div>
         ${s.persona && s.persona.read ? `<div class="s" style="margin-top:10px;color:var(--text)">${esc(s.persona.read)}</div>` : ""}
         <div style="margin-top:14px"><button class="badge off" style="cursor:pointer;border:1px solid var(--line)" onclick="openCase('${esc(s.id)}')">Open the case file</button></div></div>
-        <div class="bigf"><b>${s.f}</b><span>F bombs<br>${s.pct}% of his words</span></div></div></div>` : `<div class="tile empty" style="margin-top:16px">No streams on file yet.</div>`}
+        <div class="bigf"><b>${s.f}</b><span>F bombs<br>${s.pct}% of his words</span></div></div></div>` : `<div class="tile empty">No streams on file yet.</div>`}
+  ${meterTile(s, live)}
+  </div>
   <div class="grid stats" style="margin-top:16px">
     <div class="tile stat"><b>${c.f.toLocaleString()}</b><span>F bombs on file</span></div>
     <div class="tile stat"><b>${c.pct}%</b><span>of everything he says</span></div>
@@ -373,6 +482,7 @@ function openCase(id) {
   $("#caseBody").innerHTML = `
     <div><h4>Hack rating ${s.hack ?? "n/a"}</h4>${s.verdict ? `<p>${esc(s.verdict)}</p>` : ""}<div class="bars">${bars}</div>
       ${(s.recycled || []).length ? `<h4 style="margin-top:18px">Heard it before</h4>${s.recycled.slice(0, 6).map(([t, q]) => `<div class="q"><span>${t} in</span>"${esc(q)}"</div>`).join("")}` : ""}</div>
+    ${s.meter ? `<div class="wide"><h4>Tough guy meter</h4><p>Lowest point ${s.meter.low} (${esc(mstate(s.meter.low)[1].toLowerCase())}) at ${fmtT(s.meter.low_at)}${s.meter.lost ? `. Lost it ${s.meter.lost} time${s.meter.lost === 1 ? "" : "s"}` : ""}.</p>${meterLine(s.meter)}</div>` : ""}
     ${s.persona && s.persona.traits && s.persona.traits.some(t => t.score != null) ? `<div class="wide"><h4>Personality this stream</h4>
       ${s.persona.read ? `<p>${esc(s.persona.read)}</p>` : ""}
       <div class="pgrid">${traitBars(s.persona.traits)}
