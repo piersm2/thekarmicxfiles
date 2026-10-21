@@ -82,6 +82,43 @@ main > section { scroll-margin-top: 120px; }
 .bars .fl { height: 100%; background: var(--red); border-radius: 5px; }
 .bars .v { font: 800 18px/1 var(--head); text-align: right; font-variant-numeric: tabular-nums; }
 .bars .d { grid-column: 1 / -1; color: var(--faint); font-size: 12.5px; margin: -9px 0 0; }
+.note { color: var(--faint); font-size: 12.5px; margin: 14px 0 0; }
+/* trading card */
+.tcard { background: var(--tile); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.tc-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 22px;
+  background: radial-gradient(120% 140% at 0% 0%, #3a1214 0%, #1a1a1e 60%); border-bottom: 2px solid var(--red); }
+.tc-id { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.tc-id i { width: 58px; height: 58px; border-radius: 12px; background: var(--red); display: grid; place-items: center; font: 900 22px/1 var(--head); font-style: normal; flex: none; }
+.tc-id b { display: block; font: 900 30px/1 var(--head); letter-spacing: -.5px; }
+.tc-id small { display: block; color: var(--dim); margin-top: 6px; font-size: 13.5px; }
+.tc-hack { text-align: right; flex: none; }
+.tc-hack small { display: block; font: 800 11.5px/1 var(--head); letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); }
+.tc-hack b { display: block; font: 900 84px/.9 var(--head); letter-spacing: -3px; font-variant-numeric: tabular-nums; margin-top: 4px; }
+.tc-hack span { font: 800 16px/1.1 var(--head); color: var(--red2); }
+.tc-read { padding: 18px 22px; font-size: 17px; line-height: 1.5; border-bottom: 1px solid var(--line); }
+.tc-read small { display: block; color: var(--faint); font-size: 12.5px; margin-top: 6px; }
+.tc-body { display: grid; grid-template-columns: 1fr 1fr; }
+.tc-body > div { padding: 18px 22px; }
+.tc-body > div + div { border-left: 1px solid var(--line); }
+.tcard h3 { font: 800 12.5px/1 var(--head); letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); margin: 0 0 14px; }
+.bars.sm { grid-template-columns: 130px 1fr 36px; gap: 9px 12px; }
+.bars.sm .v { font-size: 15px; }
+.bars.sm .tr { height: 8px; }
+.bars.sm .fl.p { background: var(--dim); }
+.mood { display: flex; height: 14px; border-radius: 5px; overflow: hidden; gap: 2px; }
+.mood i { display: block; height: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--dim); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.m-Heated { background: var(--red2); } .m-Laughing { background: #3987e5; } .m-Chill { background: #199e70; } .m-Flat { background: var(--faint); } .m-Off { background: #3a3a42; }
+.tc-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 22px; padding: 18px 22px; border-top: 1px solid var(--line); }
+.chipr { display: flex; flex-wrap: wrap; gap: 6px; }
+.chipr span { font: 600 13px/1 var(--body); background: var(--tile2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; }
+.chipr span b { color: var(--dim); margin-left: 4px; font-weight: 700; }
+.chipr.hot span { border-color: rgba(224, 38, 45, .5); }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.tl { display: flex; height: 22px; border-radius: 6px; overflow: hidden; gap: 1px; margin-top: 4px; }
+.tl i { display: block; height: 100%; min-width: 3px; }
 
 /* streams tab */
 .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -152,6 +189,8 @@ footer p { margin: 0 0 6px; max-width: 80ch; }
   .mid small { display: none; }
   .hero, .file2, .boards { grid-template-columns: 1fr; }
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tc-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tc-body { grid-template-columns: 1fr; } .tc-body > div + div { border-left: 0; border-top: 1px solid var(--line); }
 }
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
@@ -159,6 +198,10 @@ footer p { margin: 0 0 6px; max-width: 80ch; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cards { grid-template-columns: 1fr; }
   .rating .num { font-size: 88px; }
+  .tc-head { padding: 16px; } .tc-id i { width: 46px; height: 46px; font-size: 18px; } .tc-id b { font-size: 24px; }
+  .tc-hack b { font-size: 64px; } .tc-read, .tc-body > div, .tc-chips { padding-left: 16px; padding-right: 16px; }
+  .tc-chips { grid-template-columns: 1fr; } .bars.sm { grid-template-columns: 112px 1fr 32px; }
+  .pgrid { grid-template-columns: 1fr; }
   .bars { grid-template-columns: 130px 1fr 36px; }
   .dbody { grid-template-columns: 1fr; }
   .tabs { width: 100%; justify-content: space-between; }
@@ -197,7 +240,8 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const short = n => String(n).replace(/\s*\([^)]*\)$/, "");
 const minus = v => String(v).replace("-", "−");
-const LETTER = { swearing: "L", begging: "B", chat: "C", catchphrases: "R", dead_air: "D", mocking: "M", clips: "V" };
+const LETTER = { recycled: "R", drama: "D", begging: "B", filler: "F" };
+const partsOf = x => (x.parts && x.parts.length) ? x.parts : [];
 const TALLY = { swearing: "Swearing", begging: "Begging", chat: "Reading chat", catchphrases: "Repeat bits", mocking: "Voices and characters", people: "Dabbleverse names" };
 const KIND = { character: "His character", clip: "Clip or video", guest: "Guest" };
 let D = null;
@@ -227,33 +271,56 @@ async function load() {
   show(location.hash.slice(1) || "scorecard", true);
 }
 
+const MOOD = ["Heated", "Laughing", "Chill", "Flat", "Off mic"];
+const mcls = m => "m-" + String(m).split(" ")[0];
+function moodBar(mix) {
+  const items = MOOD.filter(m => mix && mix[m]);
+  if (!items.length) return `<p class="note" style="margin:0">Shows up after some talking.</p>`;
+  return `<div class="mood">${items.map(m => `<i class="${mcls(m)}" style="flex:${mix[m]}" title="${m} ${mix[m]}%"></i>`).join("")}</div>
+    <div class="legend">${items.map(m => `<span><i class="${mcls(m)}"></i>${m} ${mix[m]}%</span>`).join("")}</div>`;
+}
+function traitBars(traits) {
+  return `<div class="bars sm">${(traits || []).map(t => `<div title="${esc(t.raw == null ? "Not enough yet" : t.raw + " " + t.unit)}">${esc(t.name)}</div>
+    <div class="tr"><div class="fl p" style="width:${t.score || 0}%"></div></div><div class="v">${t.score ?? "n/a"}</div>`).join("")}</div>`;
+}
+function chipr(rows, fmt, none, hot) { return rows && rows.length ? `<div class="chipr${hot ? " hot" : ""}">${rows.map(fmt).join("")}</div>` : `<p class="note" style="margin:0">${none}</p>`; }
+
 function scorecard(live) {
-  const c = D.career, s = live || D.streams[0];
-  const hot = new Set(c.cats.filter(x => x.score != null && x.score >= 40).map(x => x.key));
+  const c = D.career, s = live || D.streams[0], K = D.card || { traits: [], obsessions: [], goes_after: [], talks_up: [], triggers: [] };
+  const P = partsOf(c);
   $("#scorecard").innerHTML = `
-  <div class="grid hero">
-    <div class="tile"><h3>Hack rating</h3>
-      <div class="rating"><div class="num">${c.hack ?? "NR"}</div>
-        <div><div class="lbl">${esc(verdict(c.hack))}</div>
-          <p>${c.streams} stream${c.streams === 1 ? "" : "s"} on file, ${dur(c.listened_s)} of tape. 0 is legit, 100 is a total hack.</p>
-          <div class="letters">${c.cats.map(x => `<span class="${hot.has(x.key) ? "hot" : ""}" title="${esc(x.name)}">${LETTER[x.key] || "?"} ${x.score ?? "n/a"}</span>`).join("")}</div></div></div></div>
-    ${s ? `<div class="tile"><h3>${live ? "On air now" : "Latest stream"}</h3>
+  <div class="tcard">
+    <div class="tc-head"><div class="tc-id"><i>KX</i><div><b>KarmicX</b><small>KXL. ${c.streams} stream${c.streams === 1 ? "" : "s"} on file, ${dur(c.listened_s)} of tape.</small></div></div>
+      <div class="tc-hack"><small>Hack rating</small><b>${c.hack ?? "NR"}</b><span>${esc(verdict(c.hack))}</span></div></div>
+    <div class="tc-read">${K.read ? esc(K.read) : "The read shows up after his first full stream."}
+      <small>${K.read_by === "claude" ? "Claude's read, sharpened after every stream." : "Read from the numbers."} Measured from what he says and how he sounds on air. Not a diagnosis.</small></div>
+    <div class="tc-body">
+      <div><h3>Personality on air</h3>${traitBars(K.traits)}</div>
+      <div><h3>What makes a hack</h3><div class="bars sm">${P.map(x => `<div>${esc(x.name)}</div><div class="tr"><div class="fl" style="width:${x.score || 0}%"></div></div><div class="v">${x.score ?? "n/a"}</div>`).join("")}</div>
+        <h3 style="margin-top:20px">Moods</h3>${moodBar(K.mood_mix)}</div></div>
+    <div class="tc-chips">
+      <div><h3>Obsessions</h3>${chipr(K.obsessions.slice(0, 6), o => `<span>${esc(o[0])}<b>${o[1]}</b></span>`, "Needs more streams.")}</div>
+      <div><h3>Goes after</h3>${chipr(K.goes_after, f => `<span title="${f.hostile} hostile of ${f.mentions} mentions">${esc(short(f.name))}<b>${f.hostile}</b></span>`, "Nobody yet.", true)}</div>
+      <div><h3>Talks up</h3>${chipr(K.talks_up, f => `<span title="${f.warm} warm of ${f.mentions} mentions">${esc(short(f.name))}<b>${f.warm}</b></span>`, "Nobody yet.")}</div>
+      <div><h3>Gets heated about</h3>${chipr(K.triggers, t => `<span>${esc(short(t[0]))}<b>${t[1]}</b></span>`, "Nothing clear yet.")}</div>
+    </div>
+  </div>
+  ${s ? `<div class="tile" style="margin-top:16px"><h3>${live ? "On air now" : "Latest stream"}</h3>
       <div class="latest"><div>${live ? '<span class="badge">LIVE</span>' : `<span class="badge off">${esc(s.weekday)} ${esc(s.start_clock)}</span>`}
         <div class="t">${esc(s.title)}</div>
         <div class="s">${esc(s.show_type)}, ${dur(s.listened_s)}${s.viewers_avg != null ? `, about ${s.viewers_avg} watching` : ""}. Hack ${s.hack ?? "n/a"}, ${esc(s.label.toLowerCase())}.</div>
-        <div class="s" style="margin-top:10px">F word and anger: ${esc(s.link.toLowerCase())}${s.r != null ? ` (r = ${minus(s.r.toFixed(2))})` : ""}.</div>
+        ${s.persona && s.persona.read ? `<div class="s" style="margin-top:10px;color:var(--text)">${esc(s.persona.read)}</div>` : ""}
         <div style="margin-top:14px"><button class="badge off" style="cursor:pointer;border:1px solid var(--line)" onclick="openCase('${esc(s.id)}')">Open the case file</button></div></div>
-        <div class="bigf"><b>${s.f}</b><span>F bombs<br>${s.pct}% of his words</span></div></div></div>` : `<div class="tile empty">No streams on file yet.</div>`}
-  </div>
+        <div class="bigf"><b>${s.f}</b><span>F bombs<br>${s.pct}% of his words</span></div></div></div>` : `<div class="tile empty" style="margin-top:16px">No streams on file yet.</div>`}
   <div class="grid stats" style="margin-top:16px">
     <div class="tile stat"><b>${c.f.toLocaleString()}</b><span>F bombs on file</span></div>
     <div class="tile stat"><b>${c.pct}%</b><span>of everything he says</span></div>
     <div class="tile stat"><b>${c.swears.toLocaleString()}</b><span>swears in total</span></div>
     <div class="tile stat"><b>${c.words.toLocaleString()}</b><span>words on the record</span></div>
   </div>
-  <div class="tile" style="margin-top:16px"><h3>Hack habits, 0 to 100</h3><div class="bars">
+  <div class="tile" style="margin-top:16px"><h3>Every habit counted</h3><div class="bars">
     ${c.cats.map(x => `<div>${esc(x.name)}</div><div class="tr"><div class="fl" style="width:${x.score || 0}%"></div></div><div class="v">${x.score ?? "n/a"}</div>`).join("")}
-  </div></div>`;
+  </div><p class="note">The Hack rating weighs four things: recycled material, drama farming, begging, and filler and cheap shock, each compared with the other shows tracked. The worst habit counts extra.</p></div>`;
 }
 
 function streams() {
@@ -298,13 +365,19 @@ function file() {
 function openCase(id) {
   const s = D.streams.find(x => x.id === id); if (!s) return;
   $("#caseTitle").textContent = `${s.title}, ${s.weekday} ${s.start_clock}`;
-  const bars = s.cats.map(c => `<div>${esc(c.name)}</div><div class="tr"><div class="fl" style="width:${c.score || 0}%"></div></div><div class="v">${c.score ?? "n/a"}</div>
-    <div class="d">${c.score != null ? `${c.raw} ${esc(c.unit)}` : "Still learning this one"}</div>`).join("");
+  const bars = partsOf(s).map(c => `<div>${esc(c.name)}</div><div class="tr"><div class="fl" style="width:${c.score || 0}%"></div></div><div class="v">${c.score ?? "n/a"}</div>
+    <div class="d">${c.score != null ? esc(c.signals.map(x => `${x[1]} ${x[2]}`).join(", ")) + (c.why ? `. ${esc(c.why)}` : "") : "Still learning this one"}</div>`).join("");
   const tally = Object.entries(TALLY).map(([k, n]) => (s.tally[k] || []).length ? `<div class="wide"><h4>${n}</h4><ul class="tl">${s.tally[k].map(([w, c, ts]) =>
     `<li><span>${esc(short(w))}<br><span class="times">${ts.slice(0, 8).map(fmtT).join(", ")}${ts.length > 8 ? " and more" : ""}</span></span><b>${c}</b></li>`).join("")}</ul></div>` : "").join("");
   const voices = (s.voices || []).filter(v => v.kind !== "host");
   $("#caseBody").innerHTML = `
-    <div><h4>Hack rating ${s.hack ?? "n/a"}</h4><div class="bars">${bars}</div></div>
+    <div><h4>Hack rating ${s.hack ?? "n/a"}</h4>${s.verdict ? `<p>${esc(s.verdict)}</p>` : ""}<div class="bars">${bars}</div>
+      ${(s.recycled || []).length ? `<h4 style="margin-top:18px">Heard it before</h4>${s.recycled.slice(0, 6).map(([t, q]) => `<div class="q"><span>${t} in</span>"${esc(q)}"</div>`).join("")}` : ""}</div>
+    ${s.persona && s.persona.traits && s.persona.traits.some(t => t.score != null) ? `<div class="wide"><h4>Personality this stream</h4>
+      ${s.persona.read ? `<p>${esc(s.persona.read)}</p>` : ""}
+      <div class="pgrid">${traitBars(s.persona.traits)}
+        <div>${s.persona.mood.length ? `<div class="tl">${s.persona.mood.map(([a, b, m]) => `<i class="${mcls(m)}" style="flex:${b - a}" title="${m}, ${fmtT(a)} to ${fmtT(b)}"></i>`).join("")}</div>` : ""}${moodBar(s.persona.mix)}
+        ${s.persona.feuds.length ? `<p style="margin-top:12px">Talked about ${s.persona.feuds.map(f => `${esc(short(f.name))} (${f.mentions}${f.hostile ? `, ${f.hostile} hostile` : ""})`).join(", ")}.</p>` : ""}</div></div></div>` : ""}
     <div><h4>The F word</h4><p>${s.f} F bombs and ${s.swears} swears in ${s.words.toLocaleString()} of his words${s.per_hour ? `, about ${s.per_hour} F bombs an hour of talking` : ""}.</p>
       ${s.r != null ? `<p>F word and anger: ${esc(s.link.toLowerCase())} (r = ${minus(s.r.toFixed(2))}).${s.anger_with_f != null ? ` His voice read ${s.anger_with_f} out of 100 around an F bomb and ${s.anger_without_f} the rest of the time.` : ""}</p>` : ""}
       ${voices.length ? `<h4 style="margin-top:18px">Who else was on</h4><p>${voices.map(v => `${esc(v.name)} (${esc(KIND[v.kind] || v.kind)}, ${dur(v.secs)})`).join(", ")}</p>` : ""}
